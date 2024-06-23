@@ -8,20 +8,12 @@ window = tk.Tk()
 window.title("PDF to Audio Reader")
 
 # Configure the window
-window.rowconfigure([0,1,2,3], minsize=50, weight=1)
+window.rowconfigure([0,1,2,3,4], minsize=50, weight=1)
 window.columnconfigure([0,1], minsize=50, weight=1)
 
-#create a frame
-frame = tk.Frame(master=window, height=3)
-frame.pack(fill=tk.BOTH, expand=True, side=tk.TOP)
-
 #add a label
-title = tk.Label(master=frame, text="PDF to Audio Reader")
-title.pack()
-
-#create another frame 
-frame2 = tk.Frame(master=window)
-frame2.pack(fill=tk.BOTH, expand=True)
+title = tk.Label(master=window, text="PDF to Audio Reader")
+title.grid(row=0, column=0)
 
 # Browse the file 
 def browse(): 
@@ -118,23 +110,23 @@ def voice_over(text):
     engine.stop()
 
 # Create a button to browse the file
-button = tk.Button(master=frame2, text="Browse Files", command=browse, width=10, height=1)
-button.grid(row=3, column=0)
+button = tk.Button(master=window, text="Browse Files", command=browse, width=10, height=1)
+button.grid(row=4, column=0)
 
 # Choose whether male/female voice over
-voice_label = tk.Label(master=frame2, text="Voice (Male/Female)", height=2)
-voice_label.grid(row=0, column=0, sticky="w")
+voice_label = tk.Label(master=window, text="Voice (Male/Female)", height=2)
+voice_label.grid(row=1, column=0, sticky="w")
 
-voice_over_entry = tk.Entry(master=frame2, width=15)
-voice_over_entry.grid(row=0, column=1)
+voice_over_entry = tk.Entry(master=window, width=15)
+voice_over_entry.grid(row=1, column=1)
 
 #add label for rate
-rate_label = tk.Label(master=frame2, text="RATE", height=2)
-rate_label.grid(row=1, column=0)
+rate_label = tk.Label(master=window, text="RATE", height=2)
+rate_label.grid(row=2, column=0)
 
 # Choose the rate
-num = tk.Label(master=frame2, text="100", height=2)
-num.grid(row=1, column=1)
+num = tk.Label(master=window, text="175", height=2)
+num.grid(row=2, column=1)
 
 def handle_dec():
     numd = int(num["text"])
@@ -144,10 +136,10 @@ def handle_inc():
     numi = int(num["text"])
     num["text"] = f"{numi + 10}"
 
-dec = tk.Button(master=frame2, text="-", command=handle_dec)
-dec.grid(row=2, column=0, sticky="nsew")
+dec = tk.Button(master=window, text="-", command=handle_dec)
+dec.grid(row=3, column=0, sticky="nsew")
 
-inc = tk.Button(master=frame2, text="+", command=handle_inc)
-inc.grid(row=2, column=1, sticky="news")
+inc = tk.Button(master=window, text="+", command=handle_inc)
+inc.grid(row=3, column=1, sticky="news")
 
 window.mainloop()
